@@ -1,14 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  return (
+   return (
     <div className="App">
 
       
     </div>
   );
+  return React.createElement('h1', { className: 'App' }, 'Hi i\'am React al sa app!!');
 }
 
 export default App;
