@@ -6,10 +6,9 @@ const person = (args) => {
     
     return (
     <div className="Person">
-        <p>I'am {args.name}! and iam {args.age} years old</p>
-        <p>{args.otherState}</p>
+        <p onClick={args.click}>I'am {args.name}! and iam {args.age} years old</p>
         <p>{args.children}</p>
-        <p><input type="text" onChange={args.changed} value={args.name}/></p>
+        <input type="text" onChange={args.changed} value={args.name}/>
     </div>
     )
 };
