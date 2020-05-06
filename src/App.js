@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import Radium from 'radium'
+import Radium, { StyleRoot } from 'radium'
 
 class App extends Component{
 
@@ -108,6 +108,7 @@ render(){
     classes = classes.join(' ');
 
    return (
+     <StyleRoot>
     <div className="App">
        <p className={classes}>this is my app</p>
       <br/>
@@ -117,6 +118,7 @@ render(){
       <br/>
       {persons} 
     </div>
+    </StyleRoot>
   );
 
 }
