@@ -1,21 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
-import styled from 'styled-components';
-import Person from './Person/Person';
+import cssClasses from './App.module.css';
+import Person from '../components/Persons/Person/Person';
 
-const ToggleButton = styled.button`
-background-color: ${props => props.alt ? 'red' : 'blue'};
-color: white;
-font: inherit;
-border: 1px solid blue;
-padding: 8px;
-cursor: pointer;
-margin-bottom: 10px;
-  &:hover {
-  background-color: ${props => props.alt ? 'pink' : 'lightblue'};
-  color: 'black'
-  }
-`;
 
 
 class App extends Component{
@@ -30,9 +16,6 @@ class App extends Component{
     showPersons: false
   }
 
-  
-
-  
   nameChangedHandler1 = (event,id) => {
 
     const personIndex = this.state.persons.findIndex(p => {
@@ -48,14 +31,6 @@ class App extends Component{
     const persons = [...this.state.persons];
     persons[personIndex]= person;
     this.setState({persons: persons});
-
-    /*this.setState({
-      persons: [
-        { name : event.target.value , age: 30},
-        { name : 'aladin' , age: 29},
-        { name : 'steph', age: 22}
-      ]
-    })*/
   }
 
   togglePersonsHandler = () => {
@@ -72,6 +47,7 @@ class App extends Component{
 render(){
 
     let persons = null;
+    let btnClass=[cssClasses.button];
 
     if (this.state.showPersons){
       persons = (
@@ -90,27 +66,27 @@ render(){
        } 
       </div> 
       );
-  
+       btnClass.push(cssClasses.Red);
     }
 
     let classes =[];
     if(this.state.persons.length <= 2){
-      classes.push('red');
+      classes.push(cssClasses.red);
     }
 
     if(this.state.persons.length <= 1){
-      classes.push('bold');
+      classes.push(cssClasses.bold);
     }
 
     classes = classes.join(' ');
 
    return (
-    <div className="App">
+    <div className={cssClasses.App}>
        <p className={classes}>this is my app</p>
       <br/>
-      <ToggleButton 
-      alt={this.state.showPersons}
-      onClick={this.togglePersonsHandler}>toogle persons</ToggleButton>
+      <button 
+      className={btnClass.join(' ')}
+      onClick={this.togglePersonsHandler}>toogle persons</button>
       <br/>
       {persons} 
     </div>
