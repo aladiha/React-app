@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import cssClasses from './App.module.css';
 import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit'
+import withClass from '../hoc/WithClass';
+import Auxilary from '../hoc/Auxilary'
 
 
 
@@ -74,21 +76,21 @@ render(){
     }
 
    return (
-    <div className={cssClasses.App}>
+    <Auxilary>
     <Cockpit 
     title={this.props.appTitle}
     showPersons= {this.state.showPersons}
-    persons = {this.state.persons}
+    length = {this.state.persons.length}
     toggle = {this.togglePersonsHandler}
      />
     {persons}
-    </div>
+    </Auxilary>
   );
 
 }
 }
 
-export default App;
+export default withClass(App,cssClasses.App);
 
 
 
