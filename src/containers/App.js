@@ -24,18 +24,12 @@ class App extends Component{
 
   static getDerivedStateFromProps(props,state){
     console.log('[App.js] getDerivedStateFromProps',props);
-    
     return state;
   }
 
   componentDidMount(){
     console.log('[App.js] componentDidMount');
   }
-
-  
-
-
-
 
   nameChangedHandler1 = (event,id) => {
 

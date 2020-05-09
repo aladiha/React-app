@@ -1,18 +1,39 @@
-import React from 'react'
+import React, {Component} from 'react'
 import Person from './Person/Person'
 
-const persons = props => {
+class Persons extends Component {
+// static getDerivedStateFromProps(props, state) {
+//     console.log('[persons.js] getDerivedState');
+//     return state;
+// }
+
+shouldComponentUpdate(nextProps, nextState){
+    console.log('[persons.js] shouldComponentUpdate');
+    return true;
+}
+
+getSnapshotBeforeUpdate(prevProps, prevState){
+    console.log('[persons.js] getSnapshotBeforeUpdate');
+    return null;
+}
+
+componentDidUpdate(){
+    console.log('[persons.js] ComponentDidUpdate');
+}
+
+    render(){
 console.log('[Persons.js] rendering..');
-return props.persons.map((person, index) => {
+return this.props.persons.map((person, index) => {
         return(
          <Person 
-        click={() => props.clicked(index)}
-        changed={(event) => props.changed(event,person.ID)}
+        click={() => this.props.clicked(index)}
+        changed={(event) => this.props.changed(event,person.ID)}
         name={person.name} 
         age={person.age}
         key={person.ID}/>
       );
       });
     }
-export default persons;
+}
+export default Persons;
 
