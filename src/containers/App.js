@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import cssClasses from './App.module.css';
-import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons'
+import Cockpit from '../components/Cockpit/Cockpit'
 
 
 
 class App extends Component{
+
+  constructor(props){
+    super(props);
+    console.log('App[js] constructor');
+  }
 
   state = {
     persons: [
@@ -15,6 +21,21 @@ class App extends Component{
     otherState: 'something something',
     showPersons: false
   }
+
+  static getDerivedStateFromProps(props,state){
+    console.log('[App.js] getDerivedStateFromProps',props);
+    
+    return state;
+  }
+
+  componentDidMount(){
+    console.log('[App.js] componentDidMount');
+  }
+
+  
+
+
+
 
   nameChangedHandler1 = (event,id) => {
 
@@ -45,50 +66,28 @@ class App extends Component{
   }
 
 render(){
-
+    console.log('[App.js] render')
     let persons = null;
-    let btnClass=[cssClasses.button];
+
 
     if (this.state.showPersons){
-      persons = (
-      <div>
-        {
 
-        this.state.persons.map((aa, index) => {
-          return <Person 
-          click={() => this.deletePersonHandler(index)}
-          changed={(event) => this.nameChangedHandler1(event,aa.ID)}
-          name={aa.name} 
-          age={aa.age}
-          key={aa.ID}/>
-        })
-
-       } 
-      </div> 
-      );
-       btnClass.push(cssClasses.Red);
+      persons =  <Persons 
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangedHandler1}
+            persons={this.state.persons}
+            />;
     }
-
-    let classes =[];
-    if(this.state.persons.length <= 2){
-      classes.push(cssClasses.red);
-    }
-
-    if(this.state.persons.length <= 1){
-      classes.push(cssClasses.bold);
-    }
-
-    classes = classes.join(' ');
 
    return (
     <div className={cssClasses.App}>
-       <p className={classes}>this is my app</p>
-      <br/>
-      <button 
-      className={btnClass.join(' ')}
-      onClick={this.togglePersonsHandler}>toogle persons</button>
-      <br/>
-      {persons} 
+    <Cockpit 
+    title={this.props.appTitle}
+    showPersons= {this.state.showPersons}
+    persons = {this.state.persons}
+    toggle = {this.togglePersonsHandler}
+     />
+    {persons}
     </div>
   );
 
