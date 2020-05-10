@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import cssClasses from './App.module.css';
-import Persons from '../components/Persons/Persons'
-import Cockpit from '../components/Cockpit/Cockpit'
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 import withClass from '../hoc/WithClass';
-import Auxilary from '../hoc/Auxilary'
-
+import Auxilary from '../hoc/Auxilary';
+import AuthContext from '../context/auth-context'
 
 
 class App extends Component{
@@ -77,6 +77,7 @@ render(){
 
    return (
     <Auxilary>
+      <AuthContext.Provider value = {{authinticated: this.state.authinticated}}>
     <Cockpit 
     title={this.props.appTitle}
     showPersons= {this.state.showPersons}
@@ -84,6 +85,7 @@ render(){
     toggle = {this.togglePersonsHandler}
      />
     {persons}
+    </AuthContext.Provider>
     </Auxilary>
   );
 
